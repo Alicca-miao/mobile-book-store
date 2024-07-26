@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Error</title>
+</head>
+
+<body>
+    <h1>Error</h1>
+    <h2>
+        <%= message %>
+    </h2>
+    <pre><%= error.status %></pre>
+    <pre><%= error.stack %></pre>
+</body>
+
+</html>
+<!-- 错误页面的视图模板，同样使用 EJS 语法来动态渲染错误信息 -->

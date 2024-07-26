@@ -1,0 +1,86 @@
+[
+  {
+    "filmId": 10,
+    "poster": "/images/movie/4.jpg",
+    "actors": [
+      {
+        "avatarAddress": "/images/avatar/man.jpg",
+        "name": "福士苍汰",
+        "role": "actor"
+      },
+      {
+        "avatarAddress": "/images/avatar/woman.jpg",
+        "name": "杉咲花",
+        "role": "actress"
+      }
+    ],
+    "name": "境界",
+    "category": "动作",
+    "filmType": {
+      "name": "2D"
+    },
+    "premiereAt": 1672531200,  
+    "nation": "日语",
+    "grade": 7.0,
+    "runtime": 108,
+    "synopsis": "从小异于常人的黑崎一护（福士苍汰 饰），在一次机缘巧合下遭遇女死神“朽木露琪亚”（杉咲花 饰）。露琪亚是将灵魂从现实世界引领到尸魂界的收魂者之一，他们为保护人类不被“虚”侵害，一直在与这些怪物战斗。在与一只异常强大的“虚”战斗时，露琪亚身负重伤，无奈只能将死神的力量暂时转给黑崎一护，让其代为战斗。两人经过一段时间的磨合后并肩战斗，终于战胜了当年害死一护母亲的“虚”，但在这期间，露琪亚的兄长朽木白哉（石原贵雅 饰）强迫她不顾黑崎一护的生命安危收回法力。露琪亚为保护一护，拖延到与“虚”的战斗结束，并清除了一护的记忆。",
+    "_id": "abcdefghij",
+    "isPresale": "false"
+  },
+  {
+    "filmId": 11,
+    "poster": "/images/movie/5.jpg",
+    "actors": [
+      {
+        "avatarAddress": "/images/avatar/man.jpg",
+        "name": "基南·汤普森",
+        "role": "actor"
+      },
+      {
+        "avatarAddress": "/images/avatar/woman.jpg",
+        "name": "米拉·库尼斯",
+        "role": "actress"
+      }
+    ],
+    "name": "神奇乐园历险记",
+    "category": "冒险",
+    "filmType": {
+      "name": "2D"
+    },
+    "premiereAt": 1675104000, 
+    "nation": "英语",
+    "grade": 6.8,
+    "runtime": 95,
+    "synopsis": "古灵精怪的十二岁女孩朱妮（Sofia Mali 配音），偶然间她发现了一座神奇的乐园。小朱妮在乐园里遇到了憨厚可掬的蓝熊布默（肯·哈德森·坎贝尔 配音），善良的疣猪格里塔（米拉·库尼斯 配音），贫嘴的豪猪史蒂夫（约翰·奥利弗 配音），滑稽搞笑的海狸兄弟库珀（郑肯 配音）和格斯（基南·汤普森 配音），充满奇幻想象力的首领和乐园里炙手可热的动物明星猴子花生，并很快和它们成为朋友。这座隐藏在森林中的神奇乐园不仅有着形形色色的动物，还有很多惊险刺激的游乐设施。但从动物朋友口中，小朱妮得知乐园已经衰败无法运营。很快，小朱妮就意识到这座神奇乐园和她之前想象中的乐园一模一样。只有她能拯救这座已经没落的乐园。于是，她和动物朋友们组成了一只小分队，希望帮助乐园重现昔日繁华。",
+    "_id": "ijklmnopqrst",
+    "isPresale": "false"
+  },
+  {
+    "filmId": 12,
+    "poster": "/images/movie/6.jpg",
+    "actors": [
+      {
+        "avatarAddress": "/images/avatar/man.jpg",
+        "name": "张朔祯",
+        "role": "actor"
+      },
+      {
+        "avatarAddress": "/images/avatar/woman.jpg",
+        "name": "安紫依",
+        "role": "actress"
+      }
+    ],
+    "name": "毕业旅行之逍遥骑士",
+    "category": "青春",
+    "filmType": {
+      "name": "2D"
+    },
+    "premiereAt": 1677628800,  
+    "nation": "国语",
+    "grade": 5.5,
+    "runtime": 90,
+    "synopsis": "高考落榜的文艺少年杨风（张朔祯 饰）梦想成为一个“嬉皮士”浪子，并誓要在毕业旅行中完成自己的浪子清单：打架、泡妞、吸烟喝酒、打坐冥想、和摇滚歌手交朋友……他在好友陈火（赵一凡 饰）的相助下伪装成“逍遥骑士”，想借助漂亮师姐思思（安紫依 饰）完成自己的“破处之旅”，却没想到思思也暗藏自己的“少女成人计划”，“逍遥路上”演绎啼笑皆非的动人故事。",
+    "_id": "mnopqrstuvwx",
+    "isPresale": "false"
+  }
+]
