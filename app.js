@@ -1,38 +1,24 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var session = require('express-session');
+const express = require('express');
+const mysql = require('mysql2');
+const app = express();
+const port = 3000;
 
-var indexRouter = require('./routes/index');
-var apiRouter = require('./routes/api'); // 引入 API 路由
-var app = express();
+// 创建数据库连接
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root', // 替换为你的数据库用户名
+  password: '12345678', // 替换为你的数据库密码
+  database: 'booklist' // 替换为你的数据库名称
+});
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-//托管静态文件
-app.use(express.static('public'));
-
-//
-app.use(session({
-  secret: 'keyboard cat', // 对session id 相关的cookie 进行签名
-  resave: false,
-  saveUninitialized: true, // 是否保存未初始化的会话
-  cookie : {maxAge : 1000 * 60 * 60 * 24}, // 设置 session 的有效时间，单位毫秒},
-}))
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use('/images', express.static(path.join(__dirname, 'public')));
-app.use('/public', express.static(path.join(__dirname, 'public')));
-const uploadPath = path.join(__dirname, 'images');
-app.use('/images', express.static(uploadPath));
-app.use('/', indexRouter);
-app.use('/api', apiRouter); // 使用 API 路由
+// 连接到数据库
+connection.connect((err) => {
+  if (err) {
+    console.error('数据库连接失败:', err.stack);
+    return;
+  }
+  console.log('数据库连接成功');
+});
 
 //设置跨域
 app.all("*", function(req, res, next) {
@@ -45,24 +31,129 @@ app.all("*", function(req, res, next) {
   if ("OPTIONS" === req.method) return res.sendStatus(200);
   next();
 });
+// 动态获取表数据的路由
+app.get('/booklist/:tableName/:id', (req, res) => {
+  const tableName = req.params.tableName;
+  const id = req.params.id;
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+  // // 确保表名是有效的，防止 SQL 注入
+  // const validTables = ['book1', 'book2', 'book3']; // 根据实际情况定义有效的表名
+  // if (!validTables.includes(tableName)) {
+  //   return res.status(400).json({ error: '无效的表名' });
+  // }
+//183?
+  // 使用参数化查询防止 SQL 注入
+  const queryStr = `SELECT * FROM ${tableName} WHERE id = ?`;
+
+  connection.query(queryStr, [id], (err, results) => {
+    if (err) {
+      console.error('查询失败:', err);
+      return res.status(500).json({ error: '查询失败', details: err });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ error: '未找到记录' });
+    }
+    res.json(results[0]); // 返回匹配的第一条记录
+  });
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
+// 根据类型获取内容的路由
+
+
+app.get('/type', (req, res) => {
+  // const tableName = req.params.tableName;
+  const id = req.query.id || 0
+  const queryStr =  `SELECT * FROM booklist WHERE type =?`;
+  connection.query(queryStr, [id], (err, results) => {
+    if (err) {
+      console.error('查询失败:', err);
+      return res.status(500).json({ error: '查询失败', details: err });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ error: '未找到记录' });
+    }
+    res.json(results[0]); // 返回匹配的第一条记录
+  });
 });
 
-module.exports = app;
+// app.get('/booklist/:type', (req, res) => {
+//   const type = req.params.type;
+
+//   if (!type) {
+//     return res.status(400).json({ error: '缺少type参数' });
+//   }
+
+
+
+// function getType(type) {
+//   if (type == 1) {
+//     return '玄幻'
+//   } else if (type == 2) {
+//     return '修真'
+//   } else if (type == 3) {
+//     return '都市'
+//   } else if (type == 4) {
+//     return '历史'
+//   } else if (type == 5) {
+//     return '网游'
+//   }
+// }
+
+//   // 使用参数化查询防止 SQL 注入
+//   const queryStr = 'SELECT * FROM booklist WHERE type= ?';
+// let typee=getType(type)
+//   connection.query(queryStr, [typee], (err, results) => {
+//     if (err) {
+//       console.error('查询失败:', err);
+//       return res.status(500).json({ error: '查询失败', details: err });
+//     }
+//     if (results.length === 0) {
+//       return res.status(404).json({ error: '未找到记录' });
+//     }
+//     res.json(results[0]); // 返回匹配的第一条记录
+//   });
+// });
+
+//接下来是booklist的部分
+app.get('/booklist', (req, res) => {
+  // const tableName = req.params.tableName;
+  const id = req.query.id || 0
+  const queryStr = id? `SELECT * FROM booklist WHERE id =?`:`select * from booklist;`;
+  connection.query(queryStr, [id], (err, results) => {
+    if (err) {
+      console.error('查询失败:', err);
+      return res.status(500).json({ error: '查询失败', details: err });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ error: '未找到记录' });
+    }
+    res.json(results[0]); // 返回匹配的第一条记录
+  });
+});
+app.get('/titles', (req, res) => {
+  // const tableName = req.params.tableName;
+  const id = req.query.id || 0
+  const queryStr =  `SELECT * FROM booktitles WHERE id =?`;
+  connection.query(queryStr, [id], (err, results) => {
+    if (err) {
+      console.error('查询失败:', err);
+      return res.status(500).json({ error: '查询失败', details: err });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ error: '未找到记录' });
+    }
+    res.json(results[0]); // 返回匹配的第一条记录
+  });
+});
+//还差个booktitle应该不用了？
+
+
+
+
+
+
+// 启动服务器
+app.listen(port, () => {
+  console.log(`服务器正在监听 http://localhost:${port}`);
+});
