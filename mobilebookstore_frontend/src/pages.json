@@ -13,12 +13,7 @@
         "navigationBarTitleText": "我的"
       }
     },
-    {
-      "path": "pages/cart/cart",
-      "style": {
-        "navigationBarTitleText": "购物车"
-      }
-    },
+
     {
       "path": "pages/category/category",
       "style": {
@@ -56,12 +51,6 @@
         "pagePath": "pages/category/category",
         "iconPath": "static/tabs/category_default.png",
         "selectedIconPath": "static/tabs/category_selected.png"
-      },
-      {
-        "text": "购物车",
-        "pagePath": "pages/cart/cart",
-        "iconPath": "static/tabs/cart_default.png",
-        "selectedIconPath": "static/tabs/cart_selected.png"
       },
       {
         "text": "我的",
